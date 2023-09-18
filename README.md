@@ -1,14 +1,27 @@
-## Terraform Assignment Documentation
+# Terraform Assignment Document
 
-The Terraform files I provided are used to create a secure VPC infrastructure with two public subnets and two private subnets. The public subnets have a NAT gateway attached to them, and the private subnets have a security group rule that allows SSH traffic only from the bastion host. The bastion host is in a public subnet and has a security group rule that allows SSH traffic from the public IP address of my computer.
+## This repo will create below resources in AWS
 
-The Terraform files also create a Network Load Balancer (NLB) that is attached to the two private subnets. The NLB has a listener that listens on port 80 and forwards traffic to a target group. The target group has the two private instances attached to it.
+- VPC: For creating our own isolated network on aws cloud.
+- IGW: For getting bydirection network to public subnet
+- NAT: For getting internet to private subnet nodes. Only outgoing connection
+- ROUTE TABLES: To associate subnet with NAT and IGW
+- SECURITY GROUP: Allow traffic only from specific IP's or SG and outgoing traffic to only specific instances or internet.
+- INSTANCES: It will create three instance, Two  instances in two diffrent private subnet for hosting application and one Baston host in public subnet to access the instances launced in private subnet.
 
-## Connectivity 
-##### The resources in the main.tf file are connected to each other as follows:
 
-- The NLB is attached to the two public subnets. This allows the NLB to receive traffic from the internet.
-  
-- The private instances are attached to the NLB through a target group. This allows the NLB to - distribute traffic to the private instances.
-- The private instances are also attached to a security group that allows traffic from the NLB. - This prevents the private instances from receiving traffic from the internet directly.
-- The bastion instance is attached to a security group that allows SSH traffic from the public IP address of your computer. This allows you to connect to the bastion instance using SSH.
+#### How the above created infra is secure and Highly available?
+
+## Security:
+- Application hosted on private instances which is not directly accessible from the internet. So your application is safe
+- Private instances are getting incoming connection only from Bastion host for ssh on port 22 and SG of NLB on port 80.
+- Baston host is geeting incoming ssh connection only from my machine IP and outgoing ssh connection to only private subnet instances.
+
+##### For more security we can use AWS WAL & AWS SHIELD:
+- AWS WAF (Web Application Firewall) is a managed web application firewall that helps protect your web applications from common web exploits and attacks. It can be used to filter and block malicious traffic from reaching your applications, and to protect your applications from common attacks such as SQL injection, cross-site scripting (XSS), and denial-of-service attacks.
+
+- AWS Shield is a managed distributed denial of service (DDoS) protection service that safeguards applications running on AWS. It provides protection against a wide range of DDoS attack vectors, including volumetric attacks, protocol attacks, and application layer attacks.
+
+## HA
+- The application is highly available because it is launched on two diffrent instances on two diffrent AZ.So if one of the AZ goes down, still your application would be available.
+
