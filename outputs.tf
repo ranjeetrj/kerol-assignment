@@ -19,4 +19,7 @@ output "server_public_ips" {
   value = [for instance in aws_instance.nginx : instance.public_ip]
 }
 
+output "nlb_dns_name" {
+  value = aws_lb.network.dns_name
+}
 
