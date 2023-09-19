@@ -25,3 +25,24 @@
 ## HA
 - The application is highly available because it is launched on two diffrent instances on two diffrent AZ.So if one of the AZ goes down, still your application would be available.
 
+### To implement above infrastructure, Clone the repo. and execute below commands:
+
+To initialize the repository :
+```bash
+terraform init
+```
+
+To draft the plan :
+```bash
+terraform plan
+```
+
+To create the infrastructure :
+```bash
+terraform apply
+```
+
+To destroy the infrastructure :
+```bash
+terraform destory
+```
