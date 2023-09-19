@@ -10,9 +10,10 @@
 - INSTANCES: It will create three instance, Two  instances in two diffrent private subnet for hosting application and one Baston host in public subnet to access the instances launced in private subnet.
 
 
+## Security:
+
 #### How the above created infra is secure and Highly available?
 
-## Security:
 - Application hosted on private instances which is not directly accessible from the internet. So your application is safe
 - Private instances are getting incoming connection only from Bastion host for ssh on port 22 and SG of NLB on port 80.
 - Baston host is geeting incoming ssh connection only from my machine IP and outgoing ssh connection to only private subnet instances.
