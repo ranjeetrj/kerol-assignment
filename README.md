@@ -1,5 +1,5 @@
 # Terraform Assignment Document
-
+![Diagram](./diagram.png)
 ## This repo will create below resources in AWS
 
 - VPC: For creating our own isolated network on aws cloud.
